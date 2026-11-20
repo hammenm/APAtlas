@@ -1,0 +1,26 @@
+{
+  "name": "@atlas/api",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./db": "./src/db/index.ts",
+    "./domain": "./src/domain/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc",
+    "db:generate": "bun --bun --env-file=../../.env drizzle-kit generate",
+    "db:migrate": "bun --bun --env-file=../../.env drizzle-kit migrate",
+    "db:studio": "bun --bun --env-file=../../.env drizzle-kit studio"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.45.4",
+    "hono": "^4.13.19",
+    "postgres": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.5",
+    "drizzle-kit": "^0.31.11",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "atlas",
+  "private": true,
+  "type": "module",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "bun --filter @atlas/web dev",
+    "build": "bun --filter @atlas/web build",
+    "start": "bun --filter @atlas/web start",
+    "typecheck": "bun --filter '*' typecheck",
+    "db:generate": "bun --filter @atlas/api db:generate",
+    "db:migrate": "bun --filter @atlas/api db:migrate",
+    "db:studio": "bun --filter @atlas/api db:studio",
+    "scrape": "bun --filter @atlas/worker scrape"
+  }
+}
