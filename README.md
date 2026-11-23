@@ -1,10 +1,10 @@
-# atlas
+# APAtlas
 
 > Which Archipelago games can you play with what you already own?
 
-atlas compares your game libraries (Steam, GOG, manual import…) with the catalog of games that have an [Archipelago](https://archipelago.gg) implementation, then helps you and your friends pick what to play together.
+APAtlas compares your game libraries (Steam, GOG, manual import…) with the catalog of games that have an [Archipelago](https://archipelago.gg) implementation, then helps you and your friends pick what to play together.
 
-> atlas is a community project. It is not affiliated with the Archipelago project or its maintainers.
+> APAtlas is a community project. It is not affiliated with the Archipelago project or its maintainers.
 
 ## Installing / Getting started
 
@@ -36,7 +36,7 @@ This installs the dependencies, starts PostgreSQL in Docker, creates the tables,
 ### Setting up Dev
 
 ```shell
-git clone https://github.com/<your-account>/atlas.git
+git clone https://github.com/cailloubleu/APAtlas.git
 cd atlas/
 bun install
 ```
