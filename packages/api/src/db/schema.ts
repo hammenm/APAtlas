@@ -31,7 +31,7 @@ export const tagKind = pgEnum("tag_kind", [
   "feature", // Archipelago features: DeathLink, EnergyLink…
 ]);
 
-export const store = pgEnum("store", ["steam", "gog", "epic"]);
+export const store = pgEnum("store", ["steam"]);
 
 /* ------------------------------------------------------------------ */
 /* Common columns                                                     */
@@ -57,7 +57,7 @@ export const game = pgTable(
     name: text("name").notNull(),
 
     apStatus: apStatus("ap_status"),
-    imageUrl: text("image_url"),
+    imageFile: text("image_file"),
 
     isFree: boolean("is_free").notNull().default(false),
     adultContent: boolean("adult_content").notNull().default(false),
@@ -76,21 +76,18 @@ export const game = pgTable(
 export const gameSource = pgTable(
   "game_source",
   {
-    id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
-
     gameId: integer("game_id")
       .notNull()
       .references(() => game.id, { onDelete: "cascade" }),
 
     source: catalogSource("source").notNull(),
     externalId: text("external_id").notNull(),
-    url: text("url"),
     revisionAt: timestamp("revision_at", { withTimezone: true }),
 
     ...timestamps,
   },
   (t) => [
-    uniqueIndex("game_source_external_idx").on(t.source, t.externalId),
+    primaryKey({ columns: [t.source, t.externalId] }),
     index("game_source_game_idx").on(t.gameId),
   ],
 );
@@ -147,7 +144,6 @@ export const gameTag = pgTable(
     tagId: integer("tag_id")
       .notNull()
       .references(() => tag.id, { onDelete: "cascade" }),
-    source: catalogSource("source").notNull(),
   },
   (t) => [
     primaryKey({ columns: [t.gameId, t.tagId] }),
