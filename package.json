@@ -11,6 +11,6 @@
     "db:generate": "bun --filter @atlas/api db:generate",
     "db:migrate": "bun --filter @atlas/api db:migrate",
     "db:studio": "bun --filter @atlas/api db:studio",
-    "scrape": "bun --filter @atlas/worker scrape"
+    "scrape:full": "bun --filter @atlas/worker scrape:full"
   }
 }

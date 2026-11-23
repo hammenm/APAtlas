@@ -3,3 +3,9 @@ build/
 .react-router/
 .env
 *.log
+
+# IntelliJ editors
+.idea
+
+# Ignore storage folder
+storage/

@@ -10,7 +10,14 @@ import {
   uniqueIndex,
 } from "drizzle-orm/pg-core";
 
-export const apStatus = pgEnum("ap_status", ["core_verified", "stable", "unstable"]);
+export const apStatus = pgEnum("ap_status", [
+  "core_verified",
+  "approved_for_core",
+  "submitted_for_core_review",
+  "custom",
+  "discontinued",
+]);
+export const stability = pgEnum("stability", ["stable", "unstable"]);
 export const moderationStatus = pgEnum("moderation_status", ["pending", "published", "hidden"]);
 export const catalogSource = pgEnum("catalog_source", ["wiki", "sheet", "github", "manual"]);
 export const linkKind = pgEnum("link_kind", [
@@ -27,6 +34,7 @@ export const tagKind = pgEnum("tag_kind", [
   "platform",
   "developer",
   "publisher",
+  "series",
   "maintainer",
   "feature", // Archipelago features: DeathLink, EnergyLink…
 ]);
@@ -57,8 +65,12 @@ export const game = pgTable(
     name: text("name").notNull(),
 
     apStatus: apStatus("ap_status"),
+    // Filled by hand or by the sheet: the wiki has no stability information.
+    stability: stability("stability"),
     imageFile: text("image_file"),
 
+    // Owned by the wiki scraper: reset on every update of the page.
+    isBroken: boolean("is_broken").notNull().default(false),
     isFree: boolean("is_free").notNull().default(false),
     adultContent: boolean("adult_content").notNull().default(false),
 

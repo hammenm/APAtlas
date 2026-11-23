@@ -3,11 +3,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "scrape": "bun src/scraper/run.ts",
+    "scrape": "bun --env-file=../../.env src/scraper/run.ts",
+    "scrape:full": "bun --env-file=../../.env src/scraper/run.ts --full",
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@atlas/api": "workspace:*"
+    "@atlas/api": "workspace:*",
+    "drizzle-orm": "0.45.4",
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
     "@types/bun": "^1.4.5",
